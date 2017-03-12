@@ -1708,6 +1708,7 @@ int cmd_commit(int argc, const char **argv, const char *prefix)
 				     &oid, flags);
 	}
 
+	unlink(git_path_commit_editmsg());
 	UNLEAK(err);
 	UNLEAK(sb);
 	return 0;
