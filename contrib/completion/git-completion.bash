@@ -2777,8 +2777,10 @@ _git_show_branch ()
 
 _git_stash ()
 {
-	local subcommands='push list show apply clear drop pop create branch'
-	local subcommand="$(__git_find_on_cmdline "$subcommands save")"
+	local subcommands subcommand
+
+	__git_get_builtin_subcommands stash
+	subcommand="$(__git_find_on_cmdline "$subcommands save")"
 	if [ -n "$(__git_find_on_cmdline "-p")" ]; then
 		subcommand="push"
 	fi
@@ -2795,7 +2797,7 @@ _git_stash ()
 	,*)
 		__git_init_builtin_opts stash_save
 		if [ -z "$(__git_find_on_cmdline "$__gitcomp_builtin_stash_save")" ]; then
-			__gitcomp "$subcommands"
+			__gitcomp_builtin stash
 		fi
 		;;
 	*,--*)
